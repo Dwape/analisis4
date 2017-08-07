@@ -39,6 +39,15 @@ def print_n_digits_of_pi(n):
     digits = pi_decimal_digits()
     print('{}{}{}'.format(str(next(digits)), '.', ''.join([str(next(digits)) for j in range(n)])))
 
-#printPiDigits()
-#print_n_digits_of_pi(200)
+#print_pi_digits()
+#print_n_digits_of_pi(100)
 #print_n_pi_digits(100)
+
+def get_nth_pi_digit(n):
+    """Returns the nth digit of pi"""
+    digits = pi_decimal_digits()
+    for i in range(n-1):
+        next(digits)
+    return next(digits)
+
+#print(get_nth_pi_digit(100))
