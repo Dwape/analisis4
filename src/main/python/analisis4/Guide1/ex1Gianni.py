@@ -14,7 +14,7 @@ def excCiii():
 
 def excA():
     i=1.0
-    while(i!=inf):
+    while i != inf:
         print(i)
         i=i*10
 
