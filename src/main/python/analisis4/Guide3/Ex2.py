@@ -31,3 +31,16 @@ def derivateC(x):
 
 
 print(newton_raphson(-4, functionC, derivateC, 1e-4, 50))
+
+
+def functionE(x):
+    return x**3-x-1
+
+
+def derivateE(x):
+    return 6*x
+
+
+print(newton_raphson(2, functionE, derivateE, 1e-4, 50))
+
+
