@@ -11,7 +11,7 @@ def graph2d(x_values, y_values, x_axis, y_axis):
     plt.show()
 
 
-def graph3d(x_values, y_values, z_values):
+def graph3di(x_values, y_values, z_values):
     """Two options:
     1. z_values don't need to be calculated with the new values of x and y np.meshgrid(x, y). If that
     is the case, z_values that were calculated previously can be used.
@@ -21,7 +21,7 @@ def graph3d(x_values, y_values, z_values):
     fig = plt.figure()
     ax = fig.gca(projection='3d')
 
-    #x_values, y_values = np.meshgrid(x_values, y_values)
+    x_values, y_values = np.meshgrid(x_values, y_values)
 
     # Plot the surface.
     surf = ax.plot_surface(x_values, y_values, z_values, cmap=cm.coolwarm, linewidth=0, antialiased=False)
@@ -36,4 +36,22 @@ def graph3d(x_values, y_values, z_values):
 
     plt.show()
 
+
+def graph3d(x_values, y_values, z_values):
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    # Make data
+    x = np.outer(x_values, y_values)
+    y = np.outer(y_values, x_values)
+    z = z_values
+
+    # Plot the surface
+    ax.plot_surface(x, y, z, color='b')
+
+    ax.zaxis.set_major_locator(LinearLocator(10))
+    ax.zaxis.set_major_formatter(FormatStrFormatter('%.02f'))
+
+    plt.show()
 
