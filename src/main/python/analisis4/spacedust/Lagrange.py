@@ -10,10 +10,10 @@ def lagrange(x_values, y_values):
                 li += "(x-" + str(x_values[j]) + ")*"
                 ld += "(" + str(x_values[i]) + "-" + str(x_values[j]) + ")*"
         li = li[:-1]
-        Lc = ld[:-1]
-        lx.append("(" + li + ")/(" + Lc + ")")
-    Px = ""
+        ld = ld[:-1]
+        lx.append("(" + li + ")/(" + ld + ")")
+    px = ""
     for i in range(0, len(x_values)):
-        Px += str(y_values[i]) + "*" + lx[i] + "+"
-    Px = Px[:-1]
-    return lambda x: eval(Px, {"x": x})
+        px += str(y_values[i]) + "*" + lx[i] + "+"
+    px = px[:-1]
+    return lambda x: eval(px, {"x": x})
