@@ -2,23 +2,27 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import cm
 from matplotlib.ticker import LinearLocator, FormatStrFormatter
+from mpl_toolkits.mplot3d import Axes3D
+from src.main.python.analisis4.spacedust.spacedust import get_column
 
-
-def graph2d(x_values, y_values):
+def graph2d(x_values, y_values, x_axis, y_axis):
     plt.plot(x_values, y_values)
+    plt.xlabel(x_axis)
+    plt.ylabel(y_axis)
     plt.show()
 
 
 def graph3d(x_values, y_values, z_values):
+    """Two options:
+    1. z_values don't need to be calculated with the new values of x and y np.meshgrid(x, y). If that
+    is the case, z_values that were calculated previously can be used.
+    2. z_values need to be calculated with the new values of x and y. Then, Lagrange could be applied
+    with np.meshgrid(x, y) and z_values to get new z_values"""
+
     fig = plt.figure()
     ax = fig.gca(projection='3d')
 
-    # Make data.
-    #X = np.arange(-5, 5, 0.25)
-    #Y = np.arange(-5, 5, 0.25)
-    x_values, y_values = np.meshgrid(x_values, y_values)
-    #R = np.sqrt(X ** 2 + Y ** 2)
-    #Z = np.sin(R)
+    #x_values, y_values = np.meshgrid(x_values, y_values)
 
     # Plot the surface.
     surf = ax.plot_surface(x_values, y_values, z_values, cmap=cm.coolwarm, linewidth=0, antialiased=False)
@@ -34,9 +38,3 @@ def graph3d(x_values, y_values, z_values):
     plt.show()
 
 
-x_val = np.array([1, 2, 3, 4, 5])
-y_val = np.array([0, 0.69315, 1.09861, 1.38629, 1.60944])
-z_val = np.array([1, 2, 3, 4, 5])
-
-#graph3d(x_val, y_val, z_val)
-graph2d(x_val, y_val)
