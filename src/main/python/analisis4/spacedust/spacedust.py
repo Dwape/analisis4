@@ -108,7 +108,7 @@ def createGraph3d():
     latitud = get_column("interpolated10.csv", 1)
     longitud = get_column("interpolated10.csv", 2)
 
-    graph3d(altura, latitud, longitud)
+    graph3d(longitud, latitud, altura)
 
 def createGraph2d(column, name):
     altura = get_column("interpolated10.csv", 0)
@@ -116,7 +116,7 @@ def createGraph2d(column, name):
 
     graph2d(axisY, altura, name, "Altura")
 
-fileWriter()
+#fileWriter()
 createGraph2d(1, "Latitud")
 createGraph2d(2, "Longitud")
 createGraph3d()
