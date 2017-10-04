@@ -3,7 +3,6 @@ import numpy as np
 from matplotlib import cm
 from matplotlib.ticker import LinearLocator, FormatStrFormatter
 from mpl_toolkits.mplot3d import Axes3D
-from src.main.python.analisis4.spacedust.spacedust import get_column
 
 def graph2d(x_values, y_values, x_axis, y_axis):
     plt.plot(x_values, y_values)
