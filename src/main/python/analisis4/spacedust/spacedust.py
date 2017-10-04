@@ -15,16 +15,6 @@ def evaluate_Points(begin, end, function, distance):
         print(function(i))
     return new_latitud
 
-
-def write_csv2d(begin, end, newLatitud, distance, filename):
-    out = csv.writer(open(filename, "w"), delimiter="\n")
-    write = []
-    for i in range(0, begin-end, distance):
-        write.append(str(i+end) + "," + str(newLatitud[int((begin-end - i) / distance)]))
-
-    out.writerow(write)
-
-
 def write_csv3d(begin, end, newLatitud, newLongitud, distance, filename):
     out = csv.writer(open(filename, "w"), delimiter="\n")
     write = []
