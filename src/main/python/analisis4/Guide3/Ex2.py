@@ -29,8 +29,36 @@ def functionC(x):
 def derivateC(x):
     return 3*x**2 + 6*x
 
-
 print(newton_raphson(-4, functionC, derivateC, 1e-4, 50))
+
+def functionD(x):
+    return x-0.8-0.2*math.sin(x)
+
+
+def derivateD(x):
+    return 1-0.2*math.cos(x)
+
+print(newton_raphson(math.pi/2, functionD, derivateD, 1e-4, 50))
+
+def functionE(x):
+    return x**3-x-1
+
+
+def derivateE(x):
+    return 3*x**2-1
+
+print(newton_raphson(2, functionE, derivateE, 1e-4, 50))
+
+def function3(x):
+    return
+
+
+def derivate3(x):
+    return 1/(2*math.sqrt(x))
+
+print(newton_raphson(2, function3, derivate3, 1e-4, 50))
+
+
 
 
 def functionE(x):
