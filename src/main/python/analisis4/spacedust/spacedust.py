@@ -37,7 +37,7 @@ def get_column(filename, column):
     array = []
     for result in results:
         if len(result) > 0:
-            array.append(result[column])
+            array.append(float(result[column]))
     return array
 
 # np.asarray([result[column] for result in results])
@@ -73,22 +73,31 @@ def fileWriter():
     xPoint1 = evaluate_Points(int(altura[0]), int(altura[50]), functionX1, distance)
     xPoint1 = np.delete(xPoint1, len(xPoint1) - 1)
 
-    functionY2 = lagrange(altura[50:95], latitud[50:95])
-    yPoint2 = evaluate_Points(int(altura[50]), int(altura[94]), functionY2, distance)
+    functionY2 = lagrange(altura[50:91], latitud[50:91])
+    yPoint2 = evaluate_Points(int(altura[50]), int(altura[90]), functionY2, distance)
     yPoint2 = np.delete(yPoint2, len(yPoint2) - 1)
 
-    functionX2 = lagrange(altura[50:95], longitud[50:95])
-    xPoint2 = evaluate_Points(int(altura[50]), int(altura[94]), functionX2, distance)
+    functionX2 = lagrange(altura[50:91], longitud[50:91])
+    xPoint2 = evaluate_Points(int(altura[50]), int(altura[90]), functionX2, distance)
     xPoint2 = np.delete(xPoint2, len(xPoint2) - 1)
 
-    yPoint3 = evaluate_Points(int(altura[94]), 0, functionY2, distance)
-    xPoint3 = evaluate_Points(int(altura[94]), 0, functionX2, distance)
+    functionY3 = lagrange(altura[90:95], latitud[90:95])
+    yPoint3 = evaluate_Points(int(altura[90]), int(altura[94]), functionY3, distance)
+    yPoint3 = np.delete(yPoint3, len(yPoint3) - 1)
+
+    functionX3 = lagrange(altura[90:95], longitud[90:95])
+    xPoint3 = evaluate_Points(int(altura[90]), int(altura[94]), functionX3, distance)
+    xPoint3 = np.delete(xPoint3, len(xPoint3) - 1)
+
+    yPoint4 = evaluate_Points(int(altura[94]), 0, functionY3, distance)
+    xPoint4 = evaluate_Points(int(altura[94]), 0, functionX3, distance)
 
     yPoints = np.append(yPoint1, yPoint2, axis=0)
     yPoints = np.append(yPoints, yPoint3, axis=0)
+    yPoints = np.append(yPoints, yPoint4, axis=0)
     xPoints = np.append(xPoint1, xPoint2, axis=0)
     xPoints = np.append(xPoints, xPoint3, axis=0)
-
+    xPoints = np.append(xPoints, xPoint4, axis=0)
 
     write_csv3d(10000, 0, yPoints, xPoints, distance, "interpolated10.csv")
 
@@ -107,7 +116,7 @@ def createGraph2d(column, name):
 
     graph2d(axisY, altura, name, "Altura")
 
-#fileWriter()
+fileWriter()
 createGraph2d(1, "Latitud")
 createGraph2d(2, "Longitud")
 createGraph3d()
