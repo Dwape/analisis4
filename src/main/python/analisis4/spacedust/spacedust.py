@@ -27,7 +27,7 @@ def write_csv2d(begin, end, newLatitud, distance, filename):
 def write_csv3d(begin, end, newLatitud, newLongitud, distance, filename):
     out = csv.writer(open(filename, "w"), delimiter="\n")
     write = []
-    for i in range(0, begin-end, distance):
+    for i in range(0, begin-end+1, distance):
         write.append(str(i+end) + "," + str(newLatitud[int((begin-end - i) / distance)]) + "," + str(newLongitud[int((begin-end - i )/ distance)]))
 
     out.writerow(write)
@@ -45,7 +45,7 @@ def get_column(filename, column):
 
 def getZPoints(size, distance):
     xPoints = np.empty([size])
-    for i in range(0, size, distance):
+    for i in range(0, size+1, distance):
         xPoints[i] = i
     return xPoints
 
@@ -77,8 +77,8 @@ def fileWriter():
     yPoint2 = evaluate_Points(int(altura[50]), int(altura[90]), functionY2, distance)
     yPoint2 = np.delete(yPoint2, len(yPoint2) - 1)
 
-    functionX2 = lagrange(altura[50:91], longitud[50:91])
-    xPoint2 = evaluate_Points(int(altura[50]), int(altura[90]), functionX2, distance)
+    functionX2 = lagrange(altura[50:91], longitud[50:95])
+    xPoint2 = evaluate_Points(int(altura[50]), int(altura[94]), functionX2, distance)
     xPoint2 = np.delete(xPoint2, len(xPoint2) - 1)
 
     functionY3 = lagrange(altura[90:95], latitud[90:95])
@@ -99,7 +99,7 @@ def fileWriter():
     xPoints = np.append(xPoints, xPoint3, axis=0)
     xPoints = np.append(xPoints, xPoint4, axis=0)
 
-    write_csv3d(10000, 0, yPoints, xPoints, distance, "interpolated10.csv")
+    write_csv3d(10000, 0, yPoints, xPoints, distance, "interpolated1.csv")
 
 
 
