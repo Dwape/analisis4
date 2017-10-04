@@ -6,14 +6,14 @@ from src.main.python.analisis4.spacedust.grapher import graph3d, graph2d
 
 
 def evaluate_Points(begin, end, function, distance):
-    newLatitud = np.empty([int((begin - end) / distance) + 1])
+    new_latitud = np.empty([int((begin - end) / distance) + 1])
     j = 0
     for i in range(begin, end - 1, -distance):
-        newLatitud[j] = function(i)
+        new_latitud[j] = function(i)
         j += 1
         print(i)
         print(function(i))
-    return newLatitud
+    return new_latitud
 
 
 def write_csv2d(begin, end, newLatitud, distance, filename):
@@ -24,6 +24,7 @@ def write_csv2d(begin, end, newLatitud, distance, filename):
 
     out.writerow(write)
 
+
 def write_csv3d(begin, end, newLatitud, newLongitud, distance, filename):
     out = csv.writer(open(filename, "w"), delimiter="\n")
     write = []
@@ -31,6 +32,7 @@ def write_csv3d(begin, end, newLatitud, newLongitud, distance, filename):
         write.append(str(i+end) + "," + str(newLatitud[int((begin-end - i) / distance)]) + "," + str(newLongitud[int((begin-end - i )/ distance)]))
 
     out.writerow(write)
+
 
 def get_column(filename, column):
     results = csv.reader(open(filename), delimiter=",")
@@ -50,76 +52,69 @@ def getZPoints(size, distance):
     return xPoints
 
 
-#def calculateLagrange(x1, x2, distance):
-#    altura = get_column("geo_pos.csv", 0)
-#    latitud = get_column("geo_pos.csv", 1)
-#    function = lagrange(altura[x1:x2+1], latitud[x1:x2+1])
-#    return  evaluate_Points(int(altura[x1]), int(altura[x2]), function, distance)
-
-
-def fileWriter():
-    distance = 10
-    yPoints = np.empty([int(10000 / distance)])
-    xPoints = np.empty([int(10000 / distance)])
+def file_writer():
+    distance = 1
+    y_points = np.empty([int(10000 / distance)])
+    x_points = np.empty([int(10000 / distance)])
     altura = get_column("geo_pos.csv", 0)
     latitud = get_column("geo_pos.csv", 1)
     longitud = get_column("geo_pos.csv", 2)
 
-    functionY1 = lagrange(altura[0:51], latitud[0:51])
-    yPoint1 = evaluate_Points(int(altura[0]), int(altura[50]), functionY1, distance)
-    yPoint1 = np.delete(yPoint1, len(yPoint1)-1)
+    function_y1 = lagrange(altura[0:51], latitud[0:51])
+    y_point1 = evaluate_Points(int(altura[0]), int(altura[50]), function_y1, distance)
+    y_point1 = np.delete(y_point1, len(y_point1)-1)
 
-    functionX1 = lagrange(altura[0:51], longitud[0:51])
-    xPoint1 = evaluate_Points(int(altura[0]), int(altura[50]), functionX1, distance)
-    xPoint1 = np.delete(xPoint1, len(xPoint1) - 1)
+    function_x1 = lagrange(altura[0:51], longitud[0:51])
+    x_point1 = evaluate_Points(int(altura[0]), int(altura[50]), function_x1, distance)
+    x_point1 = np.delete(x_point1, len(x_point1) - 1)
 
-    functionY2 = lagrange(altura[50:91], latitud[50:91])
-    yPoint2 = evaluate_Points(int(altura[50]), int(altura[90]), functionY2, distance)
-    yPoint2 = np.delete(yPoint2, len(yPoint2) - 1)
+    function_y2 = lagrange(altura[50:91], latitud[50:91])
+    y_point2 = evaluate_Points(int(altura[50]), int(altura[90]), function_y2, distance)
+    y_point2 = np.delete(y_point2, len(y_point2) - 1)
 
-    functionX2 = lagrange(altura[50:91], longitud[50:95])
-    xPoint2 = evaluate_Points(int(altura[50]), int(altura[94]), functionX2, distance)
-    xPoint2 = np.delete(xPoint2, len(xPoint2) - 1)
+    function_x2 = lagrange(altura[50:91], longitud[50:95])
+    x_point2 = evaluate_Points(int(altura[50]), int(altura[94]), function_x2, distance)
+    x_point2 = np.delete(x_point2, len(x_point2) - 1)
 
-    functionY3 = lagrange(altura[90:95], latitud[90:95])
-    yPoint3 = evaluate_Points(int(altura[90]), int(altura[94]), functionY3, distance)
-    yPoint3 = np.delete(yPoint3, len(yPoint3) - 1)
+    function_y3 = lagrange(altura[90:95], latitud[90:95])
+    y_point3 = evaluate_Points(int(altura[90]), int(altura[94]), function_y3, distance)
+    y_point3 = np.delete(y_point3, len(y_point3) - 1)
 
-    functionX3 = lagrange(altura[90:95], longitud[90:95])
-    xPoint3 = evaluate_Points(int(altura[90]), int(altura[94]), functionX3, distance)
-    xPoint3 = np.delete(xPoint3, len(xPoint3) - 1)
+    function_x3 = lagrange(altura[90:95], longitud[90:95])
+    x_point3 = evaluate_Points(int(altura[90]), int(altura[94]), function_x3, distance)
+    x_point3 = np.delete(x_point3, len(x_point3) - 1)
 
-    yPoint4 = evaluate_Points(int(altura[94]), 0, functionY3, distance)
-    xPoint4 = evaluate_Points(int(altura[94]), 0, functionX3, distance)
+    y_point4 = evaluate_Points(int(altura[94]), 0, function_y3, distance)
+    x_point4 = evaluate_Points(int(altura[94]), 0, function_x3, distance)
 
-    yPoints = np.append(yPoint1, yPoint2, axis=0)
-    yPoints = np.append(yPoints, yPoint3, axis=0)
-    yPoints = np.append(yPoints, yPoint4, axis=0)
-    xPoints = np.append(xPoint1, xPoint2, axis=0)
-    xPoints = np.append(xPoints, xPoint3, axis=0)
-    xPoints = np.append(xPoints, xPoint4, axis=0)
+    y_points = np.append(y_point1, y_point2, axis=0)
+    y_points = np.append(y_points, y_point3, axis=0)
+    y_points = np.append(y_points, y_point4, axis=0)
+    x_points = np.append(x_point1, x_point2, axis=0)
+    x_points = np.append(x_points, x_point3, axis=0)
+    x_points = np.append(x_points, x_point4, axis=0)
 
-    write_csv3d(10000, 0, yPoints, xPoints, distance, "interpolated1.csv")
+    write_csv3d(10000, 0, y_points, x_points, distance, "interpolated10.csv")
 
 
 
-def createGraph3d():
+def create_graph_3d():
     altura = get_column("interpolated10.csv", 0)
     latitud = get_column("interpolated10.csv", 1)
     longitud = get_column("interpolated10.csv", 2)
 
-    graph3d(longitud, latitud, altura)
+    graph3d(longitud, latitud, altura, "Longitud", "Latitud", "Altura")
 
-def createGraph2d(column, name):
+def create_graph_2d(column, name):
     altura = get_column("interpolated10.csv", 0)
     axisY = get_column("interpolated10.csv", column)
 
     graph2d(axisY, altura, name, "Altura")
 
-#fileWriter()
-createGraph2d(1, "Latitud")
-createGraph2d(2, "Longitud")
-createGraph3d()
+#file_writer()
+create_graph_2d(1, "Latitud")
+create_graph_2d(2, "Longitud")
+create_graph_3d()
 
 
 
