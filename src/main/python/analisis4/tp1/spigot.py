@@ -51,3 +51,6 @@ def get_nth_pi_digit(n):
     return next(digits)
 
 #print(get_nth_pi_digit(100))
+
+print_pi_digits()
+
