@@ -1,6 +1,6 @@
 import csv
 from src.main.python.analisis4.ElHorno.RungeKutta import runge_kutta, temperature_function
-from src.main.python.analisis4.ElHorno.Grapher import graph2dHeatMap, graph
+from src.main.python.analisis4.ElHorno.Grapher import graph2dHeatMap
 
 def get_column_csv(filename, column):
     results = csv.reader(open(filename), delimiter=",")
